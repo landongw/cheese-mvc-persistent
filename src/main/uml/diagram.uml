@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="569.0">org.launchcode.models.data.CheeseDao</node>
+    <node x="450.0" y="362.0">org.launchcode.CheeseMvcApplication</node>
+    <node x="0.0" y="362.0">org.launchcode.controllers.CheeseController</node>
+    <node x="0.0" y="0.0">org.launchcode.models.Cheese</node>
+    <node x="279.0" y="0.0">org.launchcode.models.CheeseType</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="360.0" y="320.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

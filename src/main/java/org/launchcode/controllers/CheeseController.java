@@ -9,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by LaunchCode
@@ -35,6 +34,21 @@ public class CheeseController {
 
         model.addAttribute("cheeses", cheeseDao.findAll());  // TODO: Make the category name work in the html
         model.addAttribute("title", "My Cheeses");
+
+        return "cheese/index";
+    }
+
+    @RequestMapping(value = "category/{id}", method = RequestMethod.GET)
+    public String cheesesByCategory(Model model, @PathVariable int id) {
+
+        Iterable<Cheese> cheeses = cheeseDao.findAll();
+        ArrayList<Cheese> categorizedCheeses = new ArrayList<>();
+        for (Cheese cheese: cheeses) {
+            if (cheese.getCategory().getId() == id) {
+                categorizedCheeses.add(cheese);
+            }
+        }
+        model.addAttribute("cheeses", categorizedCheeses);
 
         return "cheese/index";
     }
@@ -81,5 +95,4 @@ public class CheeseController {
 
         return "redirect:";
     }
-
 }
