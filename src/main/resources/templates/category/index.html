@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+<nav th:replace="fragments :: navigation"></nav>
+<section class="Lrow">
+    <div class="Lcol">
+        <h1 th:text="${title}">Default Title</h1>
+        <hr/>
+        <a href="/category/add">Add a new category. </a>
+            <ul th:each="category : ${categories}">
+                <h4 th:text="${category.name}"></h4>
+            <hr/>
+            </ul>
+    </div>
+</section>
+
+
+
+
+</body>
+</html>
