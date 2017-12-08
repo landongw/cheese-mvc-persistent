@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+    <h1 th:text="${title}">Default Title</h1>
+    <nav th:replace="fragments :: navigation"></nav>
+    <p th:unless="${menus} and ${menus.size()}">No Menus :(</p>
+    <h3>Menu Name</h3>
+    <a href="/menu/add"><h6>Add New Menu</h6></a>
+    <div th:each="menu : ${menus}">
+        <a th:href="'/menu/view/' + ${menu.id}"><p th:text="${menu.name}"></p></a>
+        <hr/>
+    </div>
+</body>
+</html>

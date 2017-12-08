@@ -2,7 +2,7 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.Category;
 import org.launchcode.models.Cheese;
-import org.launchcode.models.CheeseType;
+import org.launchcode.models.Menu;
 import org.launchcode.models.data.CategoryDao;
 import org.launchcode.models.data.CheeseDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by LaunchCode
@@ -32,9 +32,8 @@ public class CheeseController {
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("cheeses", cheeseDao.findAll());  // TODO: Make the category name work in the html
+        model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "My Cheeses");
-
         return "cheese/index";
     }
 
@@ -49,7 +48,6 @@ public class CheeseController {
             }
         }
         model.addAttribute("cheeses", categorizedCheeses);
-
         return "cheese/index";
     }
 
@@ -74,7 +72,6 @@ public class CheeseController {
             model.addAttribute("title", "Add Cheese");
             return "cheese/add";
         }
-
         cheeseDao.save(newCheese);
         return "redirect:";
     }
@@ -89,10 +86,14 @@ public class CheeseController {
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
 
-        for (int cheeseId : cheeseIds) {
-            cheeseDao.delete(cheeseId);
+        for (int cheeseId : cheeseIds) {  // Removes cheese obj from menu (foreign key) before removing cheese
+            Cheese aCheese = cheeseDao.findOne(cheeseId);
+            Set<Menu> menus = aCheese.getMenus();
+            for (Menu menu : menus) {
+                menu.remove(aCheese);
+            }
+            cheeseDao.delete(aCheese);
         }
-
         return "redirect:";
     }
 }
