@@ -57,7 +57,7 @@ public class Menu {
         return cheeses;
     }
 
-    public void setCheeses(List<Cheese> cheeses) {
+    public void setCheeses(Set<Cheese> cheeses) {
         this.cheeses = cheeses;
     }
 }
